@@ -1,5 +1,9 @@
 Tarai::Application.routes.draw do
 
+  get "friends/list"
+
+  get "friends/search"
+
   devise_for :users
 
   resources :messages
