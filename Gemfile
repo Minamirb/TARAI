@@ -23,10 +23,20 @@ gem 'devise'
 # gem 'nokogiri'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
+gem 'wirble'
+gem 'i18n_generators', :git => 'git://github.com/amatsuda/i18n_generators'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
-# group :development, :test do
-#   gem 'webrat'
-# end
+group :development, :test do
+  gem 'capybara'
+  gem 'rspec-rails'
+  gem 'spork', '~> 0.9.0.rc'
+  gem 'watchr'
+  gem 'factory_girl_rails', :git => 'http://github.com/CodeMonkeySteve/factory_girl_rails.git'
+  gem 'timecop'
+  gem 'fuubar'
+  gem 'hirb'
+  gem 'hirb-unicode'
+end
