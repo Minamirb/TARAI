@@ -1,0 +1,242 @@
+@charset "utf-8";
+
+
+/*---------- ページ全体の指定 ----------*/
+
+body {
+  font-family: Verdana, Arial, Helvetica, sans-serif, "ＭＳ ゴシック","Hiragino KaKu Gothic Pro", Osaka;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  color: #333;
+  background-color: #c0c6c9;
+}
+
+a:link {
+  color: #004080;
+  font-size: 12px;
+}
+
+a:visited {
+  color: #004080;
+  font-size: 12px;
+}
+
+p {
+  margin: 20px 0 20px 0;
+  line-height: 150%;
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-size: 12px;
+  margin: 0;
+  padding: 2px 3px 0px 3px;
+  color: #333;
+}
+
+
+
+/*---------- メイン ----------*/
+
+#main {
+  margin: 0 auto 0 auto;
+  padding: 1px 1px 0 1px;
+  width: 800px;
+  background-color: #ffffff;
+}
+
+
+
+/*---------- ヘッダー ----------*/
+
+#header {
+  margin: 0;
+  background-color: #999999;
+}
+
+#header-inner {
+  margin: 0;
+  padding: 0;
+  width: 800px;
+  height: 120px;
+  font-family:Verdana;
+  font-family:Verdana;
+  background-image: url(../images/header.jpg);
+  background-repeat: no-repeat;
+}
+
+#header h1 {
+  margin: 0;
+  padding: 90px 0 10px 15px;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+#header a{
+  color: #ffffff;
+  font-size: 16px;
+ }
+
+#header a:hover{
+  color: #ffffff;
+  font-size: 16px;
+}
+
+#header-menu {
+  background-color: #333333;
+  margin: 0px;
+  padding-top: 8px;
+  padding-left: 15px;
+  padding-bottom: 6px;
+  border-top: solid 2px #ffffff;
+  border-bottom: solid 1px #333333;
+}
+
+#header-menu ul {
+  text-align: left;
+  padding-bottom: 1px;
+  margin: 0px;
+  width: auto;
+}
+
+#header-menu li {
+  color: #ffffff;
+  display: inline;
+  padding-left: 9px;
+  padding-right: 5px;
+  background: url(../images/l_icon.gif) no-repeat;
+}
+
+#header-menu a {
+  color: #cccccc;
+}
+
+#header-menu a:hover {
+  color: #999999;
+}
+
+
+
+/*---------- コンテンツ ----------*/
+
+#container {
+  margin: 0;
+  padding: 0;
+  width: 800px;
+  background-color: #e8ecef;
+}
+
+
+
+/*---------- メインコンテンツ ----------*/
+
+#contents {
+  float: right;
+  margin: 0;
+  padding: 10px 12px 8px 10px;
+  width: 590px;
+  line-height: 150%;
+  letter-spacing: 1px;
+  background-color: #ffffff;
+}
+
+#contents h1 {
+  margin: 0;
+  padding: 5px 0 4px 6px;
+  line-height: 110%;
+  font-size: 12px;
+  color: #ffffff;
+  background-image: url(../images/titlebar.gif);
+}
+
+
+
+/*---------- メニュー ----------*/
+
+#menu {
+  float: left;
+  margin: 0;
+  padding: 11px 2px 0 10px;
+  width: 170px;
+  height: 100%;
+  text-align: left;
+  line-height: 150%;
+  letter-spacing: 1px;
+  background-color: #e8ecef;
+}
+
+#menu h1 {
+  margin:  0;
+  padding: 5px 0 4px 6px;
+  line-height: 110%;
+  font-size: 12px;
+  color: #ffffff;
+  background-image: url(../images/sidebar.gif);
+  background-repeat: no-repeat;
+}
+
+
+#menu p {
+  margin: 10px 4px 16px 4px;
+  line-height: 150%;
+}
+
+
+li {
+  list-style-image: url(../images/mark.gif);
+  margin: 0 0 5px 0;
+}
+
+#menu a{
+  color: #004080;
+  font-size: 12px;
+ }
+
+#menu a:hover{
+  color: #004080;
+  font-size: 12px;
+}
+
+
+
+/*---------- フッター ----------*/
+
+#footer {
+  clear: both;
+  margin: 0;
+  padding: 8px 0 8px 4px;
+  text-align: left;
+  font-size: 12px;
+  color: #666666;
+  border-top: 2px;
+  border-top-style: dotted;
+  border-top-color: #999999;
+  background-color: #ffffff;
+}
+
+#footer h1 {
+  margin: 0;
+  text-align: right;
+  padding: 2px 8px 0 0;
+  font-size: 12px;
+  color: #666666;
+}
+
+#footer h1 a {
+  color: #666666;
+  font-size: 12px;
+ }
+
+#footer h1 a:hover {
+  color: #666666;
+}
+
+#footer a {
+  color: #666666;
+  font-size: 12px;
+ }
+
+#footer a:hover {
+  color: #666666;
+}
