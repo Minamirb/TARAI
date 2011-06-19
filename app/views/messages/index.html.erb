@@ -15,8 +15,8 @@
   <tr>
     <td><%= message.to_user_id %></td>
     <td><%= message.from_user_id %></td>
-    <td><%= message.omake_message %></td>
-    <td><%= message.main_message %></td>
+    <td><%= message.joke %></td>
+    <td><%= message.body %></td>
     <td><%= link_to 'Show', message %></td>
     <td><%= link_to 'Edit', edit_message_path(message) %></td>
     <td><%= link_to 'Destroy', message, :confirm => 'Are you sure?', :method => :delete %></td>
