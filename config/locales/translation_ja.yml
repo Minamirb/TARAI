@@ -6,8 +6,8 @@ ja:
 
     attributes:
       user:
-        name: の名前  #g
-        email: メール  #g
+        name: 名前
+        email: Eメール
         encrypted_password: 暗号化されたパスワード  #g
         reset_password_token: パスワードのトークンをリセットします。  #g
         reset_password_sent_at: で送信されたパスワードをリセットする  #g
@@ -18,7 +18,15 @@ ja:
         last_sign_in_ip: IPの最後の記号  #g
 
       message:
+        to_user:  宛先
+        from_user: 送信者
         joke: ジョーク  #g
-        body: ボディ  #g
+        body: 本文
 
   sign_up: サインアップ
+  sended_messages: 送信済みメッセージ一覧
+  mark_messages: 評価待ちメッセージ一覧
+  received_messages: 受信メッセージ一覧
+  funny: おもしろい
+  tedious: つまらない
+  status: 状態

@@ -210,6 +210,7 @@ ja:
       less_than_or_equal_to: "は%{count}以下の値にしてください。"
       odd: "は奇数にしてください。"
       even: "は偶数にしてください。"
+      not_saved: "登録できませんでした。"
 
   activerecord:
     errors:

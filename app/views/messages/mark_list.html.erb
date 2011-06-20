@@ -1,0 +1,22 @@
+<h1><%= t(:mark_messages) %></h1>
+
+<table>
+  <tr>
+    <% scope = [:activerecord, :attributes, :message] %>
+    <th><%= t(:from_user, :scope => scope) %></th>
+    <th><%= t(:joke, :scope => scope) %></th>
+    <th>評価</th>
+    <th></th>
+  </tr>
+
+<% @messages.each do |message| %>
+  <tr>
+    <td><%= message.from_user.name %></td>
+    <td><%= simple_format(message.joke) %></td>
+    <td> <a href="#"><%= t(:funny) %></a></td>
+    <td> <a href="#"><%= t(:tedious) %></a></td>
+  </tr>
+<% end %>
+</table>
+
+

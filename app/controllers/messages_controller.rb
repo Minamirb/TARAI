@@ -81,4 +81,27 @@ class MessagesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def sended_list
+    @messages = current_user.sended_messages
+  end
+
+  def mark_list
+    followers_messages = 
+      current_user.followers.
+      map { |follower| follower.sended_messages }.flatten
+
+    followers_marked_messages =
+      current_user.followers.
+      map { |follower| follower.feedbacks }.flatten.
+      select { |feedback| feedback.good }.
+      map { |feedback| feedback.message }.flatten
+
+    @messages = (followers_messages + followers_marked_messages).
+      select { |message| message.not_yet_comment_by(current_user) }
+  end
+
+  def received_list
+  end
+
 end

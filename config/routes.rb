@@ -6,6 +6,10 @@ Tarai::Application.routes.draw do
 
   devise_for :users
 
+  get 'messages/sended_list', :as => :sended_messages
+  get 'messages/mark_list', :as => :mark_messages
+  get 'messages/received_list', :as => :received_messages
+
   resources :messages
 
   # The priority is based upon order of creation:
