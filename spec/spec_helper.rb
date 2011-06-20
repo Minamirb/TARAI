@@ -37,6 +37,9 @@ Spork.prefork do
     # app/ 以下が更新されたらリロード
     ActiveSupport::Dependencies.clear
     ActiveRecord::Base.instantiate_observers
+
+    # devise helper mothods
+    config.include Devise::TestHelpers, :type => :controller
   end
 end
 
