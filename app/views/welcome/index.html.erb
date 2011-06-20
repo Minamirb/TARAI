@@ -1,0 +1,6 @@
+<h1>ようこそタライの世界へ</h1>
+<% if current_user %>
+  <p>ようこそ。<%= current_user.name %>さん</p>
+<% else %>
+  <p>未登録の人は今すぐ<%= link_to t(:sign_up), new_user_registration_path %></p>
+<% end %>

@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe UsersController do
+describe WelcomeController do
 
-  describe "GET 'welcome'" do
+  describe "GET 'index'" do
     it "should be successful" do
-      get 'welcome'
+      get 'index'
       response.should be_success
     end
   end
