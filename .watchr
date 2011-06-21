@@ -4,7 +4,7 @@ def notify(title, message, image)
 end
 
 def run_withnotify(*files)
-  image_root = File.expand_path("~/.autotest_images")
+  image_root = File.expand_path("./spec/.autotest_images/")
   puts "Running: #{files.join(' ')}"
   puts results = `bundle exec rspec -f p -c #{files.join(' ')}`
   output, _, fail_count, _, pending_count = 
@@ -12,11 +12,11 @@ def run_withnotify(*files)
 
 
   if fail_count.to_i > 0
-    notify "FAIL", "#{output}", "#{image_root}/fail.png"
+    notify "FAIL", "#{output}", "#{image_root + '/fail.png'}"
   elsif pending_count.to_i > 0
-    notify "Pending", "#{output}", "#{image_root}/pending.png"
+    notify "Pending", "#{output}", "#{image_root + '/pending.png'}"
   else
-    notify "Pass", "#{output}", "#{image_root}/pass.png"
+    notify "Pass", "#{output}", "#{image_root + '/pass.png'}"
   end
   no_int_for_you
 end
@@ -44,13 +44,6 @@ Signal.trap 'INT' do
   end
 end
 
-# ----------------------------------------------------------------------
-# check SASS file
-# ----------------------------------------------------------------------
-def check_sass(file)
-  system("clear; bundle exec sass --check public/stylesheet/sass#{file}")
-end
-
 # spec ファイルを修正したら、それを実行する
 watch("spec/.*/*_spec\.rb") do |match|
   run_withnotify match[0]
@@ -63,11 +56,11 @@ watch("app/(.*/.*)\.rb") do |match|
   run_withnotify %{spec/#{match[1]}_spec.rb}
 end
 
-watch("app/views/(.*)/.*\.html\.erb") do |match|
-  if match[1] == "layouts"
-    run_withnotify *Dir["spec/requests/*_spec.rb"]
-  else
-    run_withnotify %{spec/requests/#{match[1]}_spec.rb}
+watch("app/views/((.*)/.*\.html\.erb)") do |match|
+  if match[2] == "layouts"
+    run_withnotify *Dir["spec/views/**/*_spec.rb"]
+  elsif !File.basename(match[0]).start_with?('_')
+    run_withnotify %{spec/views/#{match[1]}_spec.rb}
   end
 end
 
@@ -75,6 +68,6 @@ watch("config/routes.rb") do |match|
   run_withnotify *Dir["spec/routing/*_spec.rb"]
 end
 
-# .sass ファイルを修正したら、その整合性をチェックする
+
 
 
