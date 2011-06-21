@@ -3,9 +3,9 @@
   <h1><%= current_user ? current_user.name : 'メニュー'%></h1>
 
   <p>
-    <%= link_to t(:sended_messages), sended_messages_path %><br />
-    <%= link_to t(:mark_messages), mark_messages_path %><br />
-    <%= link_to t(:received_messages), received_messages_path %><br />
+    <%= link_to_unless_current t(:sended_messages), sended_messages_path %><br />
+    <%= link_to_unless_current t(:mark_messages), mark_messages_path %><br />
+    <%= link_to_unless_current t(:received_messages), received_messages_path %><br />
     <a href="#">・サイドメニュー４</a><br />
   </p>
 
