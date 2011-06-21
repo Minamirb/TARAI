@@ -1,0 +1,19 @@
+<h1><%= t(:add_friend) %></h1>
+<table>
+  <tr>
+    <% scope = [:activerecord, :attributes, :user] %>
+    <th><%= t(:name, :scope => scope) %></th>
+    <th><%= t(:follow, :scope => scope) %></th>
+    <th><%= t(:unfollow, :scope => scope) %></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <% form_tag :action => :create, :id => user.id do %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= submit_tag t(:follow) %></td>
+    <td><%= submit_tag t(:follow) %></td>
+  </tr>
+  <% end %>
+<% end %>
+</table>
