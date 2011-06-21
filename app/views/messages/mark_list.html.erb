@@ -5,16 +5,14 @@
     <% scope = [:activerecord, :attributes, :message] %>
     <th><%= t(:from_user, :scope => scope) %></th>
     <th><%= t(:joke, :scope => scope) %></th>
-    <th>評価</th>
-    <th></th>
+    <th><%= t(:mark) %></th>
   </tr>
 
 <% @messages.each do |message| %>
   <tr>
     <td><%= message.from_user.name %></td>
     <td><%= simple_format(message.joke) %></td>
-    <td> <a href="#"><%= t(:funny) %></a></td>
-    <td> <a href="#"><%= t(:tedious) %></a></td>
+    <td> <a href="#"><%= t(:do_mark) %></a></td>
   </tr>
 <% end %>
 </table>

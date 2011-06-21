@@ -15,7 +15,7 @@
     <td><%= message.to_user.name %></td>
     <td><%= simple_format(message.joke) %></td>
     <td><%= simple_format(message.body) %></td>
-    <td> <a href="#">送信完了／送信失敗／送信中</a></td>
+    <td><%= link_to t(message.status), '#' %></td>
   </tr>
 <% end %>
 </table>

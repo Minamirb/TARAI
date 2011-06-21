@@ -2,24 +2,55 @@
 require 'spec_helper'
 
 describe Message do
-  context "#not_yet_comment_by" do 
-    before do 
-      @kozaki = User.create(:email => 'kozaki@gmail.com',
-                           :password => '111111', :password_confimation => '111111')
-      @fukaya = User.create(:email => 'fukaya@gmail.com',
-                           :password => '555555', :password_confimation => '555555')
+  before do
+    load(Rails.root + 'db' + 'seeds.rb')
+    @kozaki = email2user('kozaki')
+    @tanaka = email2user('tanaka')
+    @yamada = email2user('yamada')
+    @suzuki = email2user('suzuki')
+    @fukaya = email2user('fukaya')
 
-      @k2f = Message.create(:from_user => @kozaki, :to_user => @fukaya, 
-                           :joke => 'a', :body => 'b')
-      @tanaka = User.create(:email => 'tanaka@gmail.com', 
-                           :password => '222222', :password_confimation => '222222')
-    end
+    @received_message = num2message(1)
+    @rejected_message = num2message(2)
+    @just_send_message = num2message(3)
+    @midflow_message = num2message(4)
+  end
+  context "#not_yet_comment_by" do 
     it "まだフィードバックしていないメッセージは true" do 
-      @k2f.not_yet_comment_by(@tanaka).should be_true
+      @just_send_message.not_yet_comment_by(@tanaka).should be_true
     end
     it "既にフィードバックを作成したメッセージは false" do 
-      Feedback.create(:message => @k2f, :user => @tanaka, :good => true, :comment => 'c')
-      @k2f.not_yet_comment_by(@tanaka).should be_false
+      @rejected_message.not_yet_comment_by(@tanaka).should be_false
     end
   end
+
+  context "#already_comment_ty" do 
+    it { @just_send_message.already_comment_by(@tanaka).should be_false }
+    it { @rejected_message.already_comment_by(@tanaka).should be_true }
+  end
+
+  context "#reached? " do 
+    it "メッセージが宛先に届いたら true" do 
+      @received_message.should be_reached
+    end
+    it "メッセージが破棄されたら false" do 
+      @rejected_message.should_not be_reached
+    end
+    it "メッセージが送信中でも fase" do 
+      @midflow_message.should_not be_reached
+    end
+  end
+
+  context "#rejected?" do 
+    it "メッセージが宛先に届いたら false" do
+      @received_message.should_not be_rejected
+    end
+    it "メッセージが破棄されたら true" do 
+      @rejected_message.should be_rejected
+    end
+    it "メッセージが送信中なら false" do 
+      @midflow_message.should_not be_rejected
+    end
+  end
+
 end

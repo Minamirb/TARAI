@@ -27,6 +27,12 @@ ja:
   sended_messages: 送信済みメッセージ一覧
   mark_messages: 評価待ちメッセージ一覧
   received_messages: 受信メッセージ一覧
+  mark: 評価
+  do_mark: 評価する
   funny: おもしろい
   tedious: つまらない
   status: 状態
+
+  reached: 送信完了
+  rejected: 送信失敗
+  midflow: 送信中...
