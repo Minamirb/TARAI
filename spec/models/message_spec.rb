@@ -53,4 +53,16 @@ describe Message do
     end
   end
 
+  context "#good_marked_by" do 
+    it "「おもしろい」とコメントしたら true" do 
+      @received_message.good_marked_by(@yamada).should be_true
+    end
+    it "「つまらない」とコメントしたら false" do 
+      @received_message.good_marked_by(@tanaka).should be_false
+    end
+    it "まだコメントしていない場合も false" do 
+      @just_send_message.good_marked_by(@yamada).should be_false
+    end
+  end
+
 end

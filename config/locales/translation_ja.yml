@@ -32,6 +32,9 @@ ja:
   funny: おもしろい
   tedious: つまらない
   status: 状態
+  reject: 受信拒否
+  accept: 受け付け
+  show: 参照
 
   reached: 送信完了
   rejected: 送信失敗

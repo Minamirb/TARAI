@@ -11,6 +11,14 @@ class Message < ActiveRecord::Base
     feedbacks.where('user_id = ?', user).any?
   end
 
+  def good_marked_by(user)
+    feedbacks.where('user_id = ?', user).any? { |feedback| feedback.good }
+  end
+
+  def bad_marked_by(user)
+    feedbacks.where('user_id = ?', user).any? { |feedback| feedback.bad }
+  end
+
   def reached?
     mid_reached?(to_user)
   end

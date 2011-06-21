@@ -98,10 +98,19 @@ class MessagesController < ApplicationController
       map { |feedback| feedback.message }.flatten
 
     @messages = (followers_messages + followers_marked_messages).
-      select { |message| message.not_yet_comment_by(current_user) }
+      select { |message| message.from_user != current_user && 
+                         message.not_yet_comment_by(current_user) }
   end
 
   def received_list
+    @messages = Message.where('to_user_id = ?', current_user).select do |message|
+      !message.bad_marked_by(current_user) and 
+      current_user.followers.any? do |follower| 
+        message.from_user == follower or 
+        message.good_marked_by(follower) 
+      end
+    end
+
   end
 
 end
