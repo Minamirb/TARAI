@@ -1,7 +1,8 @@
 class FriendsController < ApplicationController
   before_filter :authenticate_user!
   def list
-    puts current_user.friends
+    @user = current_user
+    @friends = @user.friends
   end
 
   def search

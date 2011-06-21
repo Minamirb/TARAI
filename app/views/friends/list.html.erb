@@ -1,2 +1,13 @@
-<h1>Friends#list</h1>
-<p>Find me in app/views/friends/list.html.erb</p>
+<h1><%= t(:friend_list) %></h1>
+<table>
+  <tr>
+    <% scope = [:activerecord, :attributes, :user] %>
+    <th><%= t(:name, :scope => scope) %></th>
+  </tr>
+
+<% @friends.each do |friend| %>
+  <tr>
+    <td><%= friend.name %></td>
+  </tr>
+<% end %>
+</table>
