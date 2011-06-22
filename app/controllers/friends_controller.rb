@@ -6,7 +6,8 @@ class FriendsController < ApplicationController
   end
 
   def add
-    @users = User.all
+    # find all user not in current_user
+    @users = User.where("id <> ?", current_user.id)
   end
 
   def create

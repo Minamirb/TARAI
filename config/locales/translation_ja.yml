@@ -42,4 +42,7 @@ ja:
 
   friend_list: 友達一覧
   add_friend: 友達を追加
-  follow: フォロー
+  friend: 
+    name: 名前
+    follow: フォロー
+    followed: フォロー済
