@@ -1,19 +1,22 @@
 <h1><%= t(:mark_messages) %></h1>
 
 <table>
+  <thead>
   <tr>
     <% scope = [:activerecord, :attributes, :message] %>
     <th><%= t(:from_user, :scope => scope) %></th>
     <th><%= t(:joke, :scope => scope) %></th>
     <th><%= t(:mark) %></th>
   </tr>
-
+  </thead>
 <% @messages.each do |message| %>
-  <tr>
+  <tbody>
+  <tr class="<%= cycle("even", "odd") %>">
     <td><%= message.from_user.name %></td>
     <td><%= simple_format(message.joke) %></td>
-    <td> <a href="#"><%= t(:do_mark) %></a></td>
+    <td><%= link_to t(:do_mark), new_message_feedback_path(message) %></td>
   </tr>
+  </tbody>
 <% end %>
 </table>
 

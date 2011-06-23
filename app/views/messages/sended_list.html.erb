@@ -1,22 +1,24 @@
 <h1><%= t(:sended_messages) %></h1>
 
 <table>
+  <thead>
   <tr>
     <% scope = [:activerecord, :attributes, :message] %>
     <th><%= t(:to_user, :scope => scope) %></th>
     <th><%= t(:joke, :scope => scope) %></th>
     <th><%= t(:body, :scope => scope) %></th>
     <th><%= t(:status) %></th>
-    <th></th>
   </tr>
-
+  </thead>
 <% @messages.each do |message| %>
-  <tr>
+  <tbody>
+  <tr class="<%= cycle("even", "odd") %>">
     <td><%= message.to_user.name %></td>
     <td><%= simple_format(message.joke) %></td>
     <td><%= simple_format(message.body) %></td>
-    <td><%= link_to t(message.status), '#' %></td>
+    <td><%= link_to t(message.status), message_feedbacks_path(message) %></td>
   </tr>
+  </tbody>
 <% end %>
 </table>
 

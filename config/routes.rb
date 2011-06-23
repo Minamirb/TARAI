@@ -12,7 +12,10 @@ Tarai::Application.routes.draw do
   get 'messages/mark_list', :as => :mark_messages
   get 'messages/received_list', :as => :received_messages
 
-  resources :messages
+  resources :messages do 
+    resources :feedbacks, :only => [:index, :new, :create]
+  end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

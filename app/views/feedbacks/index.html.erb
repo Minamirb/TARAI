@@ -1,0 +1,49 @@
+<% scope = [:activerecord, :attributes] %>
+<h1><%= t(:sended_messages) %></h1>
+
+<table>
+  <thead>
+  <tr>
+    <th><%= t('message.to_user', :scope => scope) %></th>
+    <th><%= t('message.joke', :scope => scope) %></th>
+    <th><%= t('message.body', :scope => scope) %></th>
+    <th><%= t('status') %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><%= @message.to_user.name %></td>
+    <td><%= simple_format(@message.joke) %></td>
+    <td><%= simple_format(@message.body) %></td>
+    <td><%= t(@message.status) %></td>
+  </tr>
+  </tbody>
+</table>
+
+<h2><%= t('message.feedbacks', :scope => scope) %></h2>
+
+<table>
+  <thead>
+  <tr>
+    <th><%= t('feedback.user.name', :scope => scope) %></th>
+    <th><%= t('mark') %></th>
+    <th><%= t('feedback.comment', :scope => scope) %></th>
+  </tr>
+  </thead>
+<% @feedbacks.each do |feedback| %>
+  <tbody>
+  <tr class="<%= cycle("even", "odd") %>">
+    <td><%= feedback.user.name %></td>
+    <td><%= feedback.good ? t(:funny) : t(:tedious) %></td>
+    <td><%= simple_format(feedback.comment) %></td>
+  </tr>
+  <tbody>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to t(:back), sended_messages_path %>
+<% if @message.rejected? %>
+| <%= link_to t(:retry), edit_message_path(@message) %>
+<% end %>
