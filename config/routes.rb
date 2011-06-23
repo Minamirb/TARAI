@@ -8,11 +8,15 @@ Tarai::Application.routes.draw do
 
   devise_for :users
 
-  get 'messages/sended_list', :as => :sended_messages
-  get 'messages/mark_list', :as => :mark_messages
-  get 'messages/received_list', :as => :received_messages
-
   resources :messages do 
+    collection do 
+      get 'sended_list', :as => :sended
+      get 'mark_list', :as => :mark
+      get 'received_list', :as => :received
+    end
+    member do
+      post 'reject'
+    end
     resources :feedbacks, :only => [:index, :new, :create]
   end
 

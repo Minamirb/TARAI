@@ -113,4 +113,8 @@ class MessagesController < ApplicationController
 
   end
 
+  # POST '/messages/:id/reject
+  def reject
+  end
+
 end
