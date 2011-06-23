@@ -3,6 +3,8 @@ ja:
     models:
       user: ユーザー  #g
       message: メッセージ  #g
+      feedback: フィードバック  #g
+      friendship: 友情  #g
 
     attributes:
       user:
@@ -16,12 +18,28 @@ ja:
         last_sign_in_at: での最後の記号  #g
         current_sign_in_ip: IPの現在の記号  #g
         last_sign_in_ip: IPの最後の記号  #g
+        follower_friend_relationships: フォロワーの友人との関係  #g
+        followers: フォロワー  #g
+        friend_follower_relationships: 友人のフォロワーとの関係  #g
+        friends: 友だち  #g
+        sended_messages: Sendedメッセージ  #g
+        received_messages: 受信したメッセージ  #g
+        feedbacks: フィードバック  #g
 
       message:
         to_user:  宛先
         from_user: 送信者
         joke: ジョーク  #g
         body: 本文
+        feedbacks: フィードバック一覧
+
+      feedback:
+        comment: コメント  #g
+        user: ユーザー  #g
+        message: メッセージ  #g
+
+      friendship:
+        friend: 友達  #g
 
   sign_up: サインアップ
   sended_messages: 送信済みメッセージ一覧
@@ -35,7 +53,10 @@ ja:
   reject: 受信拒否
   accept: 受け付け
   show: 参照
+  new_feedback: 新規で評価を登録
 
   reached: 送信完了
   rejected: 送信失敗
   midflow: 送信中...
+  back: 戻る
+  retry: 再送
