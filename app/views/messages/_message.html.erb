@@ -1,0 +1,20 @@
+<% scope = [:activerecord, :attributes, :message] %>
+
+<table>
+  <thead>
+  <tr>
+    <th colspan="2"><%= t(:from_user, :scope => scope) %>さんからのメッセージ</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td bgcolor="#ffff99"><%= t(:joke, :scope => scope) %></td>
+    <td><%= simple_format(@message.joke) %></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffff99"><%= t(:body, :scope => scope) %></td>
+    <td><%= simple_format(@message.body) %></td>
+  </tr>
+  </tbody>
+</table>
+

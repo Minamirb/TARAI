@@ -15,6 +15,7 @@ Tarai::Application.routes.draw do
       get 'received_list', :as => :received
     end
     member do
+      get 'view'
       post 'reject'
     end
     resources :feedbacks, :only => [:index, :new, :create]

@@ -115,6 +115,18 @@ class MessagesController < ApplicationController
 
   # POST '/messages/:id/reject
   def reject
+    message = Message.find(params[:id])
+    Feedback.create(:message => message, :user => current_user,
+                    :good => false, :comment => 'rejected by the receiver')
+    redirect_to received_messages_path
+  end
+
+  def view
+    @message = Message.find(params[:id])
+    if @message.not_yet_comment_by(current_user)
+      Feedback.create(:message => @message, :user => current_user,
+                      :good => true, :comment => 'accepted by the receiver')
+    end
   end
 
 end

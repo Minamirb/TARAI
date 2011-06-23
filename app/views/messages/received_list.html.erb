@@ -15,8 +15,14 @@
   <tr class="<%= cycle("even", "odd") %>">
     <td><%= message.from_user.name %></td>
     <td><%= simple_format(message.joke) %></td>
-    <td><%= link_to t(:tedious), '#' %></td>
-    <td><%= link_to t(:show), '#' %></td>
+    <td>
+      <% if message.good_marked_by(current_user) %>
+      <%= t(:funny) %>
+      <% else %>
+      <%= link_to t(:tedious), reject_message_path(message), {:method => :post} %>
+      <% end %>
+    </td>
+    <td><%= link_to t(:show), view_message_path(message) %></td>
   </tr>
   </tbody>
 <% end %>
