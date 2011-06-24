@@ -64,6 +64,7 @@ ja:
   rejected: 送信失敗
   midflow: 送信中...
 
+  select_user: メッセージ送信
   friend_list: 友達一覧
   add_friend: 友達を追加
   follow: フォロー
@@ -72,3 +73,10 @@ ja:
   retry: 再送
 
 
+  friend: 
+    name: 名前
+    follow: フォロー
+    followed: フォロー済
+  messages:
+    name: 名前
+    new_message: メッセージ作成

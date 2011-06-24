@@ -6,7 +6,8 @@ class FriendsController < ApplicationController
   end
 
   def add
-    @users = User.all
+    # find all user not in current_user
+    @users = User.where("id <> ?", current_user.id)
   end
 
   def create
@@ -18,7 +19,4 @@ class FriendsController < ApplicationController
     puts friendship.save!
     redirect_to add_friend_path, :method => :get
   end
-  def search
-  end
-
 end
