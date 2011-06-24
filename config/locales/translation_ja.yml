@@ -42,6 +42,11 @@ ja:
         friend: 友達  #g
 
   sign_up: サインアップ
+  sign_in: サインイン
+  sign_out: サインアウト
+  home: ホーム
+  confirm: 本当によろしいですか？
+
   sended_messages: 送信済みメッセージ一覧
   mark_messages: 評価待ちメッセージ一覧
   received_messages: 受信メッセージ一覧
@@ -65,4 +70,5 @@ ja:
 
   back: 戻る
   retry: 再送
+
 

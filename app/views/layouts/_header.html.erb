@@ -6,12 +6,18 @@
 
 <div id="header-menu">
   <ul>
-    <li><a href="#">ホーム</a></li>
+    <li><%= link_to t(:home), root_path %></li>
     <li><a href="#">ニュース</a></li>
     <li><a href="#">ブログ</a></li>
     <li><a href="#">リンク</a></li>
     <li><a href="#">掲示板</a></li>
     <li><a href="#">サイトマップ</a></li>
-    <li><a href="#">お問い合わせ</a></li>
+    <li>
+      <% if user_signed_in? %>
+      <%= link_to t(:sign_out), destroy_user_session_path , :confirm => t(:confirm) %>
+      <% else %>
+      <%= link_to t(:sign_in), new_user_session_path %>
+      <% end %>
+    </li>
   </ul>
 </div>
