@@ -11,6 +11,8 @@ Tarai::Application.routes.draw do
   get 'messages/sended_list', :as => :sended_messages
   get 'messages/mark_list', :as => :mark_messages
   get 'messages/received_list', :as => :received_messages
+  get 'messages/select_user', :as => :select_user
+  match 'messages/:id/new' => "messages#new", :as => :new_message
 
   resources :messages
 

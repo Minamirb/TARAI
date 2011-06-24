@@ -12,12 +12,10 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :to_user_id %><br />
-    <%= f.text_field :to_user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :from_user_id %><br />
-    <%= f.text_field :from_user_id %>
+    <%= f.label :to_user %><br />
+    <%= @message.to_user.name %>
+    <%= f.hidden_field :to_user_id %>
+    <%= f.hidden_field :from_user_id %>
   </div>
   <div class="field">
     <%= f.label :joke %><br />

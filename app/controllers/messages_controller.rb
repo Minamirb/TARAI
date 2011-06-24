@@ -26,6 +26,8 @@ class MessagesController < ApplicationController
   # GET /messages/new.xml
   def new
     @message = Message.new
+    @message.to_user = User.find(params[:id]) 
+    @message.from_user = current_user
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,7 +47,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to(@message, :notice => 'Message was successfully created.') }
+        format.html { redirect_to(sended_messages_path, :notice => 'Message was successfully created.') }
         format.xml  { render :xml => @message, :status => :created, :location => @message }
       else
         format.html { render :action => "new" }
@@ -112,5 +114,18 @@ class MessagesController < ApplicationController
     end
 
   end
+
+  def select_user
+    # find all user not in current_user
+    @users = User.where("id <> ?", current_user.id)
+  end
+
+  def new_message
+
+  end
+
+  def send_message
+  end
+
 
 end
