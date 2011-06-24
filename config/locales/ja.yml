@@ -227,3 +227,10 @@ ja:
 
       full_messages:
         format: "%{attribute}%{message}"
+
+      models:
+        user:
+          attributes:
+            email:
+              taken: "既に存在するEメールです"
+

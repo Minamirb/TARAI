@@ -2,23 +2,13 @@
 require 'spec_helper'
 
 describe "Feedbacks" do
-  before do 
-    User.delete_all
-    Message.delete_all
-    Friendship.delete_all
-    Feedback.delete_all
-
-    @kozaki = User.create(:email => 'kozaki@gmail.com',
-                          :password => '111111', :password_confirm => '111111')
-    @tanaka = User.create(:email => 'tanaka@gmail.com',
-                          :password => '222222', :password_confirm => '222222')
-    @yamada = User.create(:email => 'yamada@gmail.com',
-                          :password => '333333', :password_confirm => '333333')
-    @message = Message.create(:to_user => @kozaki, :from_user => @yamada, 
-                              :joke => 'joke000', :body => 'b')
-    Friendship.create(:user => @kozaki, :friend => @tanaka)
-    Friendship.create(:user => @tanaka, :friend => @yamada)
+  before(:all) do 
+    setup_data
   end
+  after(:all) do 
+    delete_all_data
+  end
+
   describe "評価待ちメッセージに対して、評価を追加する" do
     before do 
       sign_in @tanaka

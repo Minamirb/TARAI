@@ -1,11 +1,19 @@
 require 'spec_helper'
 
 describe FriendsController do
+  before(:all) do 
+    @kozaki = FactoryGirl.create(:user, :name => 'kozaki')
+  end
   before do 
-    @kozaki = User.create(:name => 'kozaki', :email => 'kozaki@gmail.com',
-                         :password => 'password', :password_confirmation => 'password')
     sign_in @kozaki
   end
+  after do 
+    sign_out @kozaki
+  end
+  after(:all) do 
+    User.delete_all
+  end
+
   describe "GET 'list'" do
     it "should be successful" do
       get 'list'

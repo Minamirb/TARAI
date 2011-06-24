@@ -92,6 +92,59 @@ end
 # These instructions should self-destruct in 10 seconds.  If they don't, feel
 # free to delete them.
 
+def setup_data
+  (@users = ['kozaki', 'tanaka', 'yamada', 'suzuki', 'fukaya']).each do |name|
+    eval("@#{name} = FactoryGirl.create(:user, :name => '#{name}')")
+  end
 
+  (@friendships = [
+                   [ '@kozaki' , '@yamada'], [ '@kozaki' , '@tanaka'],
+                   [ '@yamada' , '@suzuki'],
+                   [ '@tanaka' , '@suzuki'],
+                   [ '@suzuki' , '@kozaki'], [ '@suzuki' , '@fukaya'],
+                   [ '@fukaya' , '@yamada']
+                  ]).each do |user, friend|
+    eval("FactoryGirl.create(:friendship, 
+                             :user => #{user}, :friend => #{friend})")
+  end
 
+  @received_message = 
+    FactoryGirl.create(:message,
+                       :to_user => @fukaya, :from_user => @kozaki)
+  @received_feedbacks = []
+  [ ['@yamada', true], ['@tanaka', false], ['@suzuki', true], ['@fukaya', true] ].
+    each do |user, value|
+    eval("@received_feedbacks << 
+             FactoryGirl.create(:feedback, :message => @received_message,
+                                :user => #{user}, :good => #{value})")
+  end
 
+  @rejected_message =
+    FactoryGirl.create(:message,
+                       :to_user => @fukaya, :from_user => @kozaki)
+  @rejected_feedbacks = []
+  [ ['@yamada', true], ['@tanaka', false], ['@suzuki', false] ].
+    each do |user, value|
+    eval("@rejected_feedbacks << 
+             FactoryGirl.create(:feedback, :message => @rejected_message,
+                                :user => #{user}, :good => #{value})")
+  end
+
+  @just_send_message = 
+    FactoryGirl.create(:message,
+                       :to_user => @fukaya, :from_user => @kozaki)
+  @midflow_message =
+    FactoryGirl.create(:message,
+                       :to_user => @fukaya, :from_user => @kozaki)
+  @midflow_feedbacks = []
+  @midflow_feedbacks << 
+    FactoryGirl.create(:feedback, :message => @midflow_message,
+                       :user => @yamada, :good => false)
+end
+
+def delete_all_data
+  User.delete_all
+  Message.delete_all
+  Friendship.delete_all
+  Feedback.delete_all
+end
