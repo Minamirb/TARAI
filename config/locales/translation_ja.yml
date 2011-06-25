@@ -83,3 +83,6 @@ ja:
     new_message: メッセージ作成
 
   title: "%{user}タ・ラ・イ"
+
+  twitter_auth: ツイッター認証
+  twitter_unauth: 認証解除

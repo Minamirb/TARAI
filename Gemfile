@@ -25,6 +25,8 @@ gem 'devise'
 # gem 'aws-s3', :require => 'aws/s3'
 gem 'wirble'
 gem 'i18n_generators', :git => 'git://github.com/amatsuda/i18n_generators'
+gem 'omniauth'
+gem 'ruby-debug19'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators

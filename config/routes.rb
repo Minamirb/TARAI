@@ -35,6 +35,9 @@ Tarai::Application.routes.draw do
     resources :feedbacks, :only => [:index, :new, :create]
   end
 
+  match "/auth/twitter/callback" => "twitter_sessions#create"
+  match "/auth/twitter_out" => "twitter_sessions#destroy", :as => :twitter_out
+  match "/auth/failure" => "twitter_sessions#failure"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
