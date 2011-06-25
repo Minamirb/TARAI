@@ -80,3 +80,5 @@ ja:
   messages:
     name: 名前
     new_message: メッセージ作成
+
+  title: "%{user}タ・ラ・イ"
