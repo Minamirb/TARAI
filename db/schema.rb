@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110625114944) do
+ActiveRecord::Schema.define(:version => 20110625120527) do
 
   create_table "feedbacks", :force => true do |t|
     t.integer  "message_id"
@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(:version => 20110625114944) do
     t.string   "uid"
     t.string   "twitter_icon_url"
     t.string   "twitter_url"
+    t.string   "token"
+    t.string   "secret"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

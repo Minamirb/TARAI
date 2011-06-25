@@ -31,6 +31,8 @@ class User < ActiveRecord::Base
     self.uid = auth["uid"]
     self.twitter_icon_url = auth["user_info"]["image"]
     self.twitter_url = auth["user_info"]["urls"]["Twitter"]
+    self.token = auth["credentials"]["token"]
+    self.secret = auth["credentials"]["secret"]
     self.save!
   end
 end

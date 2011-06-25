@@ -15,12 +15,24 @@ class TwitterSessionsController < ApplicationController
   def failure
   end
   def destroy
-    current_user.twitter_id = nil
-    current_user.uid = nil
-    current_user.twitter_icon_url = nil
-    current_user.twitter_url = nil
-    current_user.save!
-    
+    current_user.update_by_auth(
+     { 
+       'uid' => nil, 
+       'user_info' => 
+       { 'nickname' => nil, 
+         'image' => nil,
+         'urls' =>
+          {
+            'Twitter' => nil
+          }
+       },
+       'credentials' => 
+       { 
+         'token' => nil,
+         'secret' => nil
+       }
+      }
+    )
     redirect_to show_user_registration_path
   end
 end
