@@ -26,4 +26,11 @@ class User < ActiveRecord::Base
     !!self.uid
   end
 
+  def update_by_auth(auth)
+    self.twitter_id = auth["user_info"]["nickname"]
+    self.uid = auth["uid"]
+    self.twitter_icon_url = auth["user_info"]["image"]
+    self.twitter_url = auth["user_info"]["urls"]["Twitter"]
+    self.save!
+  end
 end
