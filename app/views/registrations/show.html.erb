@@ -2,5 +2,18 @@
 <table>
 <tr><th><%= t(:name) %></th><td><%= @user.name %></td></tr>
 <tr><th><%= t(:email) %></th><td><%= @user.email %></td></tr>
+<tr><th><%= t(:twitter_id) %></th>
+  <td>
+    <% if @user.twitter_auth? %>
+    <%= image_tag(@user.twitter_icon_url) %><br />
+    <%= link_to "@#{@user.twitter_id}", @user.twitter_url %>
+    <% end %>
+  </td>
+</tr>
 </table>
-<%= link_to t(:edit), edit_user_registration_path %>
+<%= link_to t(:edit), edit_user_registration_path %><br />
+<% if @user.twitter_auth? %>
+<%= link_to t(:twitter_unauth), twitter_out_path %><br />
+<% else %>
+<%= link_to t(:twitter_auth), '/auth/twitter' %><br />
+<% end %>

@@ -21,4 +21,9 @@ class User < ActiveRecord::Base
     return true if friends.index{|f| f.id == user.id}
     return false
   end
+
+  def twitter_auth?
+    !!self.uid
+  end
+
 end
