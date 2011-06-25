@@ -4,6 +4,7 @@ Tarai::Application.routes.draw do
   get "friends/add", :as => :add_friend
   post "friends/add", :as => :add_friend
   post "friends/create", :as => :create_friend
+  post "friends/unfollow", :as => :unfollow_friend
   get "friends/search", :as => :serach_friend
 
   devise_scope :user do

@@ -19,4 +19,10 @@ class FriendsController < ApplicationController
     puts friendship.save!
     redirect_to add_friend_path, :method => :get
   end
+  def unfollow
+    id = params[:id].to_i
+    friendship = Friendship.where("friend_id = ?", id).first
+    friendship.destroy
+    redirect_to add_friend_path, :method => :get
+  end
 end

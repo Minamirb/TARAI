@@ -75,9 +75,11 @@ ja:
 
 
   friend: 
+    follow_action: フォロー/アンフォロー
     name: 名前
     follow: フォロー
     followed: フォロー済
+    unfollow: アンフォロー
   messages:
     name: 名前
     new_message: メッセージ作成
