@@ -6,7 +6,12 @@ Tarai::Application.routes.draw do
   post "friends/create", :as => :create_friend
   get "friends/search", :as => :serach_friend
 
-  devise_for :users
+  devise_for :users, 
+    :controllers => {
+      :sessions => "sessions", 
+      :registrations => "registrations",
+      :passwords => "passwords"
+  }
 
   get 'messages/sended_list', :as => :sended_messages
   get 'messages/mark_list', :as => :mark_messages
