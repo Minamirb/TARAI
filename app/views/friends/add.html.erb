@@ -1,10 +1,12 @@
 <h1><%= t(:add_friend) %></h1>
 <table>
+  <thead>
   <tr>
     <% scope = [:friend] %>
     <th><%= t(:name, :scope => scope) %></th>
     <th><%= t(:follow, :scope => scope) %></th>
   </tr>
+  </thead>
 
 <% @users.each do |user| %>
   <% form_tag :action => :create, :id => user.id do %>
