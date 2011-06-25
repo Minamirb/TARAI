@@ -4,23 +4,25 @@
   <tr>
     <% scope = [:friend] %>
     <th><%= t(:name, :scope => scope) %></th>
-    <th><%= t(:follow, :scope => scope) %></th>
+    <th><%= t(:follow_action, :scope => scope) %></th>
   </tr>
   </thead>
 
 <% @users.each do |user| %>
-  <% form_tag :action => :create, :id => user.id do %>
   <tr>
     <td><%= user.name %></td>
     
     <td>
-    <% unless current_user.friend? user %>
-      <%= submit_tag t(:follow, :scope => scope) %>
-    <% else %>
-      <%= t(:followed, :scope => scope) %>
+      <% unless current_user.friend? user %>
+        <% form_tag :action => :create, :id => user.id do %>
+          <%= submit_tag t(:follow, :scope => scope) %>
+        <% end %>
+      <% else %>
+        <% form_tag :action => :unfollow, :id => user.id do %>
+          <%= submit_tag t(:unfollow, :scope => scope) %>
+        <% end %>
     <% end %>
     </td>
   </tr>
-  <% end %>
 <% end %>
 </table>
