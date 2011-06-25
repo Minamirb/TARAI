@@ -16,7 +16,7 @@ class TwitterSessionsController < ApplicationController
     current_user.twitter_id = nil
     current_user.uid = nil
     current_user.twitter_icon_url = nil
-    current_user.Twitter_url = nil
+    current_user.twitter_url = nil
     current_user.save!
     
     redirect_to show_user_registration_path
