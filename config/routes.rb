@@ -6,6 +6,9 @@ Tarai::Application.routes.draw do
   post "friends/create", :as => :create_friend
   get "friends/search", :as => :serach_friend
 
+  devise_scope :user do
+    get "users/show", :to => "registrations#show", :as => :show_user_registration
+  end
   devise_for :users, 
     :controllers => {
       :sessions => "sessions", 
