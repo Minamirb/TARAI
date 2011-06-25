@@ -47,6 +47,7 @@ ja:
   home: ホーム
   confirm: 本当によろしいですか？
 
+  send: 送信
   sended_messages: 送信済みメッセージ一覧
   mark_messages: 評価待ちメッセージ一覧
   received_messages: 受信メッセージ一覧
