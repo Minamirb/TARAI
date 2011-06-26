@@ -35,4 +35,28 @@ class User < ActiveRecord::Base
     self.secret = auth["credentials"]["secret"]
     self.save!
   end
+
+  def friends_graph
+    dg = GRATR::Digraph[]
+    construct_friends_graph(dg)
+    dg
+  end
+
+private
+  def construct_friends_graph(dg)
+    dg.add_vertex!(self, self.name) unless dg.vertex?(self)
+
+    not_yet_added_friends = friends.reject do |friend|
+      dg.vertex?(friend) and dg.edge?(self, friend)
+    end
+
+    unless not_yet_added_friends.empty?
+      not_yet_added_friends.each do |friend| 
+        dg.add_vertex!(friend, friend.name) unless dg.vertex?(friend)
+        dg.add_edge!(self, friend)     unless dg.edge?(self, friend)
+        friend.send(:construct_friends_graph, dg)
+      end
+    end
+  end
+
 end

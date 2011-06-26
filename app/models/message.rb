@@ -19,35 +19,62 @@ class Message < ActiveRecord::Base
     feedbacks.where('user_id = ?', user).any? { |feedback| feedback.bad }
   end
 
-  def reached?
-    mid_reached?(to_user)
+  def reachable?
+    from_user != to_user and
+    from_user.friends_graph.vertex?(to_user)
   end
 
-  def rejected?
-    mid_rejected?(to_user)
+  def unreachable?
+    !(reachable?)
+  end
+
+  def message_graph
+    dg = GRATR::Digraph[]
+    construct_message_graph(dg, from_user)
+    dg
   end
 
   def status
-    return :reached if reached?
-    return :rejected if rejected?
-    return :midflow
+    dg = message_graph
+    if dg.vertex?(to_user)
+      if bad_marked_by(to_user)
+        :rejected
+      elsif good_marked_by(to_user)
+        :reached
+      else
+        :midflow
+      end
+    else
+      :rejected
+    end
   end
+
+  def reached?
+    status == :reached
+  end
+
+  def rejected?
+    status == :rejected
+  end
+
 
 private
-  def mid_reached?(user)
-    user_feedback = feedbacks.select('good').where('user_id = ?', user).first
-    not user_feedback.nil? and user_feedback.good
-  end
 
-  def mid_rejected?(user)
-    return false if from_user == user
+  def construct_message_graph(dg, user)
+    return if bad_marked_by(user)
 
-    user_feedback = feedbacks.select('good').where('user_id = ?', user).first
-    if not user_feedback.nil? and user_feedback.bad
-      return true
+    dg.add_vertex!(user, user.name) unless dg.vertex?(user)
+
+    not_yet_added_friends = user.friends.reject do |friend|
+      !bad_marked_by(friend) and dg.vertex?(friend) and dg.edge?(user, friend)
     end
 
-    user.followers.all? { |follower| mid_rejected?(follower) } ? true : false
+    unless not_yet_added_friends.empty?
+      not_yet_added_friends.each do |friend| 
+        dg.add_vertex!(friend, friend.name) unless dg.vertex?(friend)
+        dg.add_edge!(user, friend)     unless dg.edge?(user, friend)
+        construct_message_graph(dg, friend)
+      end
+    end
   end
-
 end

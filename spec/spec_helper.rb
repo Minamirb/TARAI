@@ -148,3 +148,31 @@ def delete_all_data
   Friendship.delete_all
   Feedback.delete_all
 end
+
+RSpec::Matchers.define :have_edge do |source, target|
+  match do |graph|
+    graph.edge?(source, target)
+  end
+  failure_message_for_should do |graph|
+    graph_ar = graph.edges.map { |edge| "#{graph[edge.source]}->#{graph[edge.target]}" }
+    "expected that #{graph_ar} has an edge [#{graph[source]}, #{graph[target]}]"
+  end
+  failure_message_for_should_not do |graph|
+    graph_ar = graph.edges.map { |edge| "#{graph[edge.source]}->#{graph[edge.target]}" }
+    "expected that #{graph_ar} has not the edge [#{graph[source]}, #{graph[target]}]"
+  end
+end
+
+RSpec::Matchers.define :have_vertex do |vertex|
+  match do |graph|
+    graph.vertex?(vertex)
+  end
+  failure_message_for_should do |graph|
+    graph_ar = graph.edges.map { |edge| "#{graph[edge.source]}->#{graph[edge.target]}" }
+    "expected that #{graph_ar} has a vertex #{graph[vertex]}"
+  end
+  failure_message_for_should_not do |graph|
+    graph_ar = graph.edges.map { |edge| "#{graph[edge.source]}->#{graph[edge.target]}" }
+    "expected that #{graph_ar} has not a vertex #{graph[vertex]}"
+  end
+end

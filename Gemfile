@@ -28,6 +28,8 @@ gem 'i18n_generators', :git => 'git://github.com/amatsuda/i18n_generators'
 gem 'omniauth'
 gem 'ruby-debug19'
 gem 'twitter'
+gem 'gratr', :git => 'git://github.com/jdleesmiller/gratr.git'
+
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
