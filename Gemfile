@@ -29,6 +29,7 @@ gem 'omniauth'
 gem 'ruby-debug19'
 gem 'twitter'
 gem 'gratr', :git => 'git://github.com/jdleesmiller/gratr.git'
+gem 'heroku'
 
 
 # Bundle gems for the local environment. Make sure to
