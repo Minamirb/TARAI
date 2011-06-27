@@ -104,3 +104,58 @@ feedbacks.each do |num, user, good, comment|
   Feedback.create(:message_id => num2message(num).id, :user_id => email2user(user).id, :good => good,
                   :comment => comment)
 end
+
+twitter_info = 
+  [
+   ['kozaki', 
+    { :twitter_id => 'kozaki_tarai', 
+      :uid => 324621403, 
+      :twitter_icon_url => 'http://a0.twimg.com/profile_images/1414689337/kozaki_normal.jpg',
+      :twitter_url => 'http://twitter.com/kozaki_tarai',
+      :token => '324621403-XMhZ4cuy4TdI5ONwwfQwYpAzowy0xA5BYz48hUhw',
+      :secret => 'aRU7818MIkxXzC1OqXUlvJxdUG7pQ2z0LhmsWBWXEHE'
+    }],
+   ['yamada',
+    { :twitter_id => 'yamada_tarai',
+      :uid => 324622951,
+      :twitter_icon_url => 'http://a0.twimg.com/profile_images/1414693274/yamada_normal.jpg',
+      :twitter_url =>  'http://twitter.com/yamada_tarai',
+      :token =>  '324622951-LFHaOH38n0ho2JwcpiprLvmoDCqwCgI5hpphsfQB',
+      :secret => 'UzQlPpt5P1oNRpIn08sPmD8WqEOZSy4jrgunYa3shzM'
+    }],
+   ['tanaka', 
+    { :twitter_id => 'tanaka_tarai', 
+      :uid => 324622459,
+      :twitter_icon_url => 'http://a3.twimg.com/profile_images/1414691930/tanaka_normal.jpg',
+      :twitter_url => 'http://twitter.com/tanaka_tarai',
+      :token => '324622459-pqtdj4oUSTxdEWiHayacNtdY2ROCc3jBuV6U4GZw',
+      :secret => 'oPvmemkNYXAG38Qkwgty3LCvwKK6vQhNBL5bwOWGFE'
+    }],
+   ['suzuki', 
+    { :twitter_id => 'suzuki_tarai', 
+      :uid => 324623333,
+      :twitter_icon_url => 'http://a2.twimg.com/profile_images/1414694388/suzuki_normal.jpg',
+      :twitter_url => 'http://twitter.com/suzuki_tarai',
+      :token => '324623333-FZgRardFEpkeMfLdd82leOGhWgz3jkKbFLCttRsg',
+      :secret => 'EXa6vpQmQg2W5rxwpdEOtsy203FSa51OICyNSBDVg'
+    }],
+   ['fukaya', 
+    { :twitter_id => 'fukaya_tarai', 
+      :uid => 324623989,
+      :twitter_icon_url => 'http://a0.twimg.com/profile_images/1414686731/fukaya_normal.jpg',
+      :twitter_url => 'http://twitter.com/fukaya_tarai',
+      :token => '324623989-SYWfOIQ0wEgJpTkqPjUtXv2wERjmgMGV6Stfvj3m',
+      :secret => 'Jmhu2g1SJRjrRKFmbgJfJqPZZjcrFpE8dLNWFgNGY'
+    }]
+  ]
+
+twitter_info.each do |name, params|
+  user = User.find_by_email("#{name}@gmail.com")
+  user.twitter_id = params[:twitter_id]
+  user.uid        = params[:uid]
+  user.twitter_icon_url = params[:twitter_icon_url]
+  user.twitter_url = params[:twitter_url]
+  user.token = params[:token]
+  user.secret = params[:secret]
+  user.save!
+end
