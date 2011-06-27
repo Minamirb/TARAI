@@ -45,5 +45,5 @@
 
 <%= link_to t(:back), sended_messages_path %>
 <% if @message.rejected? %>
-| <%= link_to t(:retry), edit_message_path(@message) %>
+| <%= link_to t(:retry), new_message_path(@message.to_user, :message_id => @message) %>
 <% end %>

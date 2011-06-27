@@ -25,9 +25,12 @@ class MessagesController < ApplicationController
   # GET /messages/new
   # GET /messages/new.xml
   def new
-    @message = Message.new
-    @message.to_user = User.find(params[:id]) 
-    @message.from_user = current_user
+    @message = 
+      if params[:message_id] 
+        Message.new(Message.find(params[:message_id]).attributes)
+      else
+        Message.new(:from_user => current_user, :to_user => User.find(params[:id]))
+      end
 
     respond_to do |format|
       format.html # new.html.erb
