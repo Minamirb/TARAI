@@ -89,3 +89,8 @@ ja:
 
   twitter_auth: ツイッター認証
   twitter_unauth: 認証解除
+  already_auth: 認証済み
+  not_auth: 未認証
+
+  edit: 編集
+  edit_user: ユーザー情報の編集

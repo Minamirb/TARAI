@@ -3,6 +3,11 @@
   <h1><%= current_user ? current_user.name : 'メニュー'%></h1>
 
   <p>
+    <% if current_user.twitter_auth? %>
+    <%= image_tag(current_user.twitter_icon_url) %><br />
+    <%= link_to "@#{current_user.twitter_id}", current_user.twitter_url %><br />
+    <% end %>
+    <p>
     <%= link_to_unless_current t(:sended_messages), sended_messages_path %><br />
     <%= link_to_unless_current t(:mark_messages), mark_messages_path %><br />
     <%= link_to_unless_current t(:received_messages), received_messages_path %><br />
@@ -10,6 +15,7 @@
     <%= link_to_unless_current t(:add_friend), add_friend_path %><br />
     <%= link_to_unless_current t(:show_user), show_user_registration_path %><br />
     <%= link_to_unless_current t(:select_user), select_user_path %><br />
+    </p>
   </p>
 
 </div>
