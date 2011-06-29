@@ -13,21 +13,18 @@ class Feedback < ActiveRecord::Base
   after_save :tweet
 
   def tweet
-    tweet_to(message.from_user, "#{good ? 'GOOD' : 'BAD'} - http://localhost:3000#{message_feedbacks_path(message)}")
+    host_info = YAML.load(File.read(Rails.root.join('config', 'host_name.yml')))[Rails.env]
+    tweet_to(message.from_user, 
+             "#{good ? 'GOOD' : 'BAD'} - #{message_feedbacks_url(message,
+                                                                 :host => host_info['host_name'],
+                                                                 :port => host_info['port'])}")
   end
   
   private
-  def tweet_to(target, message)
+  def tweet_to(target, message, opts = { })
     if user.twitter_auth? and target.twitter_auth?
-      Twitter.configure do |config|
-        config.consumer_key       = 'dpvGz7YM47mkBAiBE5iOfw'
-        config.consumer_secret    = '01suPvpyYnDFMLHNWz8fINGtOb2FrvGWjKUGQLrFb4'
-        config.oauth_token        = user.token
-        config.oauth_token_secret = user.secret
-      end
-      
-      user_client = Twitter::Client.new
-      user_client.update("@#{target.twitter_id} : #{message}")
+      user_client = Twitter::Client.new(:oauth_token => user.token, :oauth_token_secret => user.secret)
+      user_client.update("@#{target.twitter_id} : #{message}", opts)
     end
   end
 end

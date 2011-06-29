@@ -45,4 +45,5 @@ group :development, :test do
   gem 'fuubar'
   gem 'hirb'
   gem 'hirb-unicode'
+  gem 'ruby-debug19'
 end

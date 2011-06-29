@@ -1,0 +1,9 @@
+test:
+  host_name: localhost
+  port: 3000
+development:
+  host_name: localhost
+  port: 3000
+production:
+  host_name: tarai.heroku.com
+  port: 80
