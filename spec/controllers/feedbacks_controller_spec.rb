@@ -10,13 +10,16 @@ describe FeedbacksController do
     delete_all_data
   end
 
-  def valid_attributes
-    { :good => true }
+  def valid_attributes(message, user)
+    { :good => true, :message_id => message.id, :user_id => user.id }
   end
   describe "GET index" do
     it "メッセージに対するフィードバックの一覧が得られる" do
       get :index, :message_id => @rejected_message
       assigns(:feedbacks).should =~ @rejected_feedbacks
+    end
+    it "自分自信によるフィードバックは表示されない" do 
+      
     end
   end
 
@@ -33,23 +36,26 @@ describe FeedbacksController do
 
   describe "POST create" do
     describe "with valid params" do
+      before do 
+        User.any_instance.stub(:twitter_auth?).and_return(false)
+      end
       it "creates a new Feedback" do
         expect {
           post :create, :message_id => @just_send_message,
-               :feedback => valid_attributes
+               :feedback => valid_attributes(@just_send_message, @tanaka)
         }.to change(Feedback, :count).by(1)
       end
 
       it "assigns a newly created feedback as @feedback" do
         post :create, :message_id => @just_send_message,
-             :feedback => valid_attributes
+             :feedback => valid_attributes(@just_send_message, @tanaka)
         assigns(:feedback).should be_a(Feedback)
         assigns(:feedback).should be_persisted
       end
 
       it "評価待ちメッセージ一覧にリダイレクトする" do
         post :create, :message_id => @just_send_message,
-             :feedback => valid_attributes
+             :feedback => valid_attributes(@just_send_message, @tanaka)
         response.should redirect_to(mark_messages_path)
       end
     end

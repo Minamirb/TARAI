@@ -30,6 +30,7 @@ gem 'twitter'
 gem 'gratr', :git => 'git://github.com/jdleesmiller/gratr.git'
 gem 'heroku'
 gem 'rake', '0.8.7'
+gem 'kaminari'
 
 
 # Bundle gems for the local environment. Make sure to

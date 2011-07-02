@@ -1,11 +1,14 @@
 Tarai::Application.routes.draw do
 
-  get "friends/list", :as => :friends
-  get "friends/add", :as => :add_friend
-  post "friends/add", :as => :add_friend
-  post "friends/create", :as => :create_friend
-  post "friends/unfollow", :as => :unfollow_friend
-  get "friends/search", :as => :serach_friend
+  resources :friends , :only => [:index] do 
+    member do 
+      post 'follow'
+      post 'unfollow'
+    end
+    collection do 
+      get 'search'
+    end
+  end
 
   devise_scope :user do
     get "users/show", :to => "registrations#show", :as => :show_user_registration
@@ -17,9 +20,6 @@ Tarai::Application.routes.draw do
       :passwords => "passwords"
   }
 
-  get 'messages/sended_list', :as => :sended_messages
-  get 'messages/mark_list', :as => :mark_messages
-  get 'messages/received_list', :as => :received_messages
   get 'messages/select_user', :as => :select_user
   match 'messages/:id/new' => "messages#new", :as => :new_message
 

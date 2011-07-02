@@ -14,9 +14,9 @@ describe FriendsController do
     User.delete_all
   end
 
-  describe "GET 'list'" do
+  describe "GET 'index'" do
     it "should be successful" do
-      get 'list'
+      get 'index'
       response.should be_success
     end
   end

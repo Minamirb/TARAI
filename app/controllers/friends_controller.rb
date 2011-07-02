@@ -1,28 +1,18 @@
 class FriendsController < ApplicationController
   before_filter :authenticate_user!
-  def list
-    @user = current_user
-    @friends = @user.friends
+  def index
+    @users = User.where("id <> ?", current_user.id).page(params[:page])
   end
 
-  def add
-    # find all user not in current_user
-    @users = User.where("id <> ?", current_user.id)
+  def follow
+    friend = User.find(params[:id])
+    friendship = Friendship.create!(:user => current_user, :friend => friend)
+    redirect_to friends_path
   end
 
-  def create
-    id = params[:id].to_i
-    friend = User.find(id)   
-    friendship = Friendship.new
-    friendship.user_id = current_user.id
-    friendship.friend_id = friend.id
-    puts friendship.save!
-    redirect_to add_friend_path, :method => :get
-  end
   def unfollow
-    id = params[:id].to_i
-    friendship = Friendship.where("friend_id = ?", id).first
+    friendship = current_user.follower_friend_relationships.find_by_friend_id(params[:id])
     friendship.destroy
-    redirect_to add_friend_path, :method => :get
+    redirect_to friends_path
   end
 end

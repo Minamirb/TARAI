@@ -6,6 +6,9 @@ class Feedback < ActiveRecord::Base
   belongs_to :message
   validates :good, :inclusion => { :in => [true, false] }
 
+  scope :be_good, where(:good => true)
+  scope :be_bad, where(:good => false)
+
   def bad
     !good
   end
@@ -22,7 +25,7 @@ class Feedback < ActiveRecord::Base
   
   private
   def tweet_to(target, message, opts = { })
-    if user.twitter_auth? and target.twitter_auth?
+    if user != target and user.twitter_auth? and target.twitter_auth?
       user_client = Twitter::Client.new(:oauth_token => user.token, :oauth_token_secret => user.secret)
       user_client.update("@#{target.twitter_id} : #{message}", opts)
     end

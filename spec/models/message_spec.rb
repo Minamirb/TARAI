@@ -105,4 +105,15 @@ describe Message do
     end
   end
 
+  context "after_create callback" do 
+    it "メッセージを作成したら、自画自賛する" do 
+      expect { 
+        Message.create(:from_user => @kozaki, :to_user => @yamada, :joke => 'a', :body => 'b') 
+      }.to change { Feedback.count }.by(1)
+    end
+    it "メッセージを作成したら、良い評価がとりあえず付く" do 
+      message = FactoryGirl.create(:message, :from_user => @kozaki, :to_user => @yamada)
+      message.good_marked_by(@kozaki).should be_true
+    end
+  end
 end

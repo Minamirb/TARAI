@@ -94,6 +94,8 @@ GEM
       unicode-display_width (~> 0.1.1)
     i18n (0.5.0)
     json_pure (1.5.3)
+    kaminari (0.12.4)
+      rails (>= 3.0.0)
     launchy (0.4.0)
       configuration (>= 0.0.5)
       rake (>= 0.8.1)
@@ -248,6 +250,7 @@ DEPENDENCIES
   hirb
   hirb-unicode
   i18n_generators!
+  kaminari
   omniauth
   rails (= 3.0.9)
   rake (= 0.8.7)

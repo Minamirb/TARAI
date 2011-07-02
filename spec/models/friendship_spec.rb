@@ -6,7 +6,8 @@ describe Friendship do
     kozaki = FactoryGirl.create(:user, :name => 'kozaki')
     yamada = FactoryGirl.create(:user, :name => 'yamada')
 
-    kozaki.friends << yamada << yamada
+    kozaki.friends << yamada
+    expect { kozaki.friends << yamada }.to raise_error
     kozaki.friends.should have(1).item
   end
 end

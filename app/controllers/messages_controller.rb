@@ -88,34 +88,27 @@ class MessagesController < ApplicationController
   end
 
   def sended_list
-    @messages = current_user.sended_messages
+    @messages = current_user.sended_messages.page(params[:page])
   end
-
+  
   def mark_list
-    followers_messages = 
-      current_user.followers.
-      map { |follower| follower.sended_messages }.flatten
-
-    followers_marked_messages =
-      current_user.followers.
-      map { |follower| follower.feedbacks }.flatten.
-      select { |feedback| feedback.good }.
-      map { |feedback| feedback.message }.flatten
-
-    @messages = (followers_messages + followers_marked_messages).
-      select { |message| message.from_user != current_user && 
-                         message.not_yet_comment_by(current_user) }
+    @messages = 
+      Message.not_yet_comment_by(current_user).
+        joins('LEFT JOIN feedbacks ON messages.id = feedbacks.message_id').
+          where(:'feedbacks.user_id' => current_user.followers).
+          where(:'feedbacks.good' => true).
+          select('DISTINCT messages.*').
+          page(params[:page])
   end
 
   def received_list
-    @messages = Message.where('to_user_id = ?', current_user).select do |message|
-      !message.bad_marked_by(current_user) and 
-      current_user.followers.any? do |follower| 
-        message.from_user == follower or 
-        message.good_marked_by(follower) 
-      end
-    end
-
+    @messages = 
+      Message.to(current_user).exclude_bad_marked_by(current_user).
+        joins('INNER JOIN feedbacks ON messages.id = feedbacks.message_id').
+          where(:'feedbacks.user_id' => current_user.followers).
+          where(:'feedbacks.good' => true).
+          select('DISTINCT messages.*').
+          page(params[:page])
   end
 
   # POST '/messages/:id/reject
@@ -136,7 +129,7 @@ class MessagesController < ApplicationController
 
   def select_user
     # find all user not in current_user
-    @users = User.where("id <> ?", current_user.id)
+    @users = User.where("id <> ?", current_user.id).page(params[:page])
   end
 
 end

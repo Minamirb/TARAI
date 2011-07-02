@@ -1,28 +1,31 @@
-<h1><%= t(:add_friend) %></h1>
+<h1><%= t(:friend_list) %></h1>
 <table>
   <thead>
   <tr>
-    <% scope = [:friend] %>
+    <% scope = [:activerecord, :attributes, :user] %>
     <th><%= t(:name, :scope => scope) %></th>
-    <th><%= t(:follow_action, :scope => scope) %></th>
+    <th><%= t('friend.follow_action') %></th>
   </tr>
   </thead>
 
 <% @users.each do |user| %>
   <tr>
     <td><%= user.name %></td>
-    
     <td>
       <% unless current_user.friend? user %>
-        <% form_tag :action => :create, :id => user.id do %>
-          <%= submit_tag t(:follow, :scope => scope) %>
+        <% form_tag :action => :follow, :id => user.id do %>
+          <%= submit_tag t('friend.follow') %>
         <% end %>
       <% else %>
         <% form_tag :action => :unfollow, :id => user.id do %>
-          <%= submit_tag t(:unfollow, :scope => scope) %>
+          <%= submit_tag t('friend.unfollow') %>
         <% end %>
     <% end %>
     </td>
   </tr>
 <% end %>
 </table>
+
+<br />
+<%= paginate @users %>
+

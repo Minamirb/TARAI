@@ -1,22 +1,45 @@
 class Message < ActiveRecord::Base
   belongs_to :to_user, :class_name => "User"
   belongs_to :from_user, :class_name => "User"
-  has_many :feedbacks
+  has_many :feedbacks, :conditions => proc { "user_id <> #{self.from_user.id}" }
+  has_many :good_feedbacks, :class_name => "Feedback", :conditions => proc { "good = 't'"}
+  has_many :bad_feedbacks, :class_name => "Feedback", :conditions => proc { "good = 'f'" }
+
+  scope :not_yet_comment_by, lambda { |user|
+    messages = Message.all.reject do |message|
+      Feedback.where(:message_id => message).where(:user_id => user).exists?
+    end
+    where(:id => messages)
+  }
+  scope :to, lambda { |user| where(:to_user_id => user) }
+
+  scope :bad_marked_by, lambda { |user|
+    joins('INNER JOIN feedbacks ON messages.id = feedbacks.message_id').
+    where(:'feedbacks.user_id' => user).
+    where(:'feedbacks.good' => false)
+  }
+  
+  scope :exclude_bad_marked_by, lambda { |user|
+    messages = Message.all.reject { |message|
+      message.bad_feedbacks.exists?
+    }
+    where(:id => messages)
+  }
 
   def not_yet_comment_by(user)
     feedbacks.where('user_id = ?', user).empty?
   end
 
   def already_comment_by(user)
-    feedbacks.where('user_id = ?', user).any?
+    feedbacks.where(:user_id => user).exists?
   end
 
   def good_marked_by(user)
-    feedbacks.where('user_id = ?', user).any? { |feedback| feedback.good }
+    Feedback.where(:message_id => self).where(:user_id => user).be_good.exists?
   end
 
   def bad_marked_by(user)
-    feedbacks.where('user_id = ?', user).any? { |feedback| feedback.bad }
+    Feedback.where(:message_id => self).where(:user_id => user).be_bad.exists?
   end
 
   def reachable?
@@ -57,8 +80,13 @@ class Message < ActiveRecord::Base
     status == :rejected
   end
 
+  after_create :praise_by_myself
 
 private
+  def praise_by_myself
+    Feedback.create(:message => self, :user => self.from_user, :good => true,
+                    :comment => 'nice joke')
+  end
 
   def construct_message_graph(dg, user)
     return if bad_marked_by(user)

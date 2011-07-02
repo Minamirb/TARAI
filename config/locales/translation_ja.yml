@@ -94,3 +94,12 @@ ja:
 
   edit: 編集
   edit_user: ユーザー情報の編集
+
+  views:
+    pagination:
+      first: "⇦先頭"
+      last: "最後⇨"
+      previous: "«前"
+      next: "次»"
+      truncate: "..."
+  
