@@ -13,6 +13,7 @@ Spork.prefork do
   require 'rspec/rails'
   require 'capybara/rspec'
 
+
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
@@ -41,6 +42,15 @@ Spork.prefork do
 
     # devise helper mothods
     config.include Devise::TestHelpers, :type => :controller
+
+    # request spec のためのフィルター
+    config.before(:all, :selenium => true) do 
+      Capybara.current_driver = :selenium
+    end
+    config.after(:all, :selenium => true) do 
+      Capybara.use_default_driver
+    end
+
   end
 end
 
@@ -48,7 +58,7 @@ Spork.each_run do
   # This code will be run each time you run your specs.
 
   # FactoryGirl の factories をリロード
-  FactoryGirl.registry = FactoryGirl::Registry.new
+  FactoryGirl.factories.clear
   FactoryGirl.definition_file_paths.each do |path|
     load "#{path}.rb" if File.exists?("#{path}.rb")
 
@@ -132,7 +142,8 @@ def setup_data
 
   @just_send_message = 
     FactoryGirl.create(:message,
-                       :to_user => @fukaya, :from_user => @kozaki)
+                       :to_user => @fukaya, :from_user => @kozaki,
+                       :joke => 'joke000')
   @midflow_message =
     FactoryGirl.create(:message,
                        :to_user => @fukaya, :from_user => @kozaki)

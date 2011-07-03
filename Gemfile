@@ -31,7 +31,7 @@ gem 'gratr', :git => 'git://github.com/jdleesmiller/gratr.git'
 gem 'heroku'
 gem 'rake', '0.8.7'
 gem 'kaminari'
-
+gem 'escape_utils'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators

@@ -71,6 +71,7 @@ GEM
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    escape_utils (0.2.3)
     factory_girl (2.0.0.rc1)
     faraday (0.6.1)
       addressable (~> 2.2.4)
@@ -243,6 +244,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   devise
+  escape_utils
   factory_girl_rails!
   fuubar
   gratr!

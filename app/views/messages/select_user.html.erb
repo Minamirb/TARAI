@@ -7,10 +7,10 @@
   </tr>
 
 <% @users.each do |user| %>
-  <% form_tag :action => :create, :id => user.id do %>
+  <%= form_tag :action => :create, :id => user.id do %>
   <tr>
     <td><%= user.name %></td>
-    
+
     <td><%= link_to t(:new_message, :scope => scope), new_message_url(user) %></td>
   </tr>
   <% end %>

@@ -17,8 +17,8 @@
 
   <div class="field">
     <%= field_set_tag t(:mark) do %>
-    <%= f.radio_button :good, true %><%= t(:funny) %>
-    <%= f.radio_button :good, false %><%= t(:tedious) %>
+    <label><%= f.radio_button :good, true %><%= t(:funny) %></label>
+    <label><%= f.radio_button :good, false %><%= t(:tedious) %></label>
     <% end %>
   </div>
   <%= f.hidden_field :message_id %>
