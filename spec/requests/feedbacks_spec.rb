@@ -44,7 +44,7 @@ describe "Feedbacks" do
       it "評価を登録すると、評価待ちのメッセージ一覧から評価済みメッセージが消える" do 
         page.should_not have_content('joke000')
       end
-      it "鈴木さんに評価待ちメッセージとして表示される", :selenium => true, :js => true do 
+      it "鈴木さんに評価待ちメッセージとして表示される", :js => true do 
         sign_out
         sign_in @suzuki
         visit mark_messages_path
@@ -75,7 +75,7 @@ describe "Feedbacks" do
         page.should have_content('joke111')
         page.should have_content('本日はお日柄もよく云々...')
       end
-      context "友人の評価待ちメッセージ一覧に表示される" , :selenium => true, :js => true do 
+      context "友人の評価待ちメッセージ一覧に表示される", :js => true do 
         before do 
           sign_out
           sign_in @yamada

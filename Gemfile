@@ -41,7 +41,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'spork', '~> 0.9.0.rc'
   gem 'watchr'
-  gem 'factory_girl_rails', :git => 'http://github.com/CodeMonkeySteve/factory_girl_rails.git'
+  gem 'factory_girl_rails', '~> 1.1.rc'
   gem 'timecop'
   gem 'fuubar'
   gem 'hirb'

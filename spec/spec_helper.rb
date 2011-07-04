@@ -43,14 +43,6 @@ Spork.prefork do
     # devise helper mothods
     config.include Devise::TestHelpers, :type => :controller
 
-    # request spec のためのフィルター
-    config.before(:all, :selenium => true) do 
-      Capybara.current_driver = :selenium
-    end
-    config.after(:all, :selenium => true) do 
-      Capybara.use_default_driver
-    end
-
   end
 end
 

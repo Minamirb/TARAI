@@ -113,7 +113,8 @@ describe Message do
     end
     it "メッセージを作成したら、良い評価がとりあえず付く" do 
       message = FactoryGirl.create(:message, :from_user => @kozaki, :to_user => @yamada)
-      message.good_marked_by(@kozaki).should be_true
+#      message.good_marked_by(@kozaki).should be_true
+      Feedback.where(:message_id => message, :user_id => @kozaki, :good => true).should be_exist
     end
   end
 end

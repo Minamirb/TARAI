@@ -10,14 +10,6 @@ GIT
   specs:
     gratr (0.5.1)
 
-GIT
-  remote: http://github.com/CodeMonkeySteve/factory_girl_rails.git
-  revision: de20675bef9fb6d71281c61a59fa63991301d8c4
-  specs:
-    factory_girl_rails (1.0)
-      factory_girl (~> 2.0.0.beta)
-      railties (~> 3.0.0)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -73,6 +65,9 @@ GEM
       abstract (>= 1.0.0)
     escape_utils (0.2.3)
     factory_girl (2.0.0.rc1)
+    factory_girl_rails (1.1.rc1)
+      factory_girl (~> 2.0.0.rc)
+      railties (>= 3.0.0)
     faraday (0.6.1)
       addressable (~> 2.2.4)
       multipart-post (~> 1.1.0)
@@ -245,7 +240,7 @@ DEPENDENCIES
   capybara
   devise
   escape_utils
-  factory_girl_rails!
+  factory_girl_rails (~> 1.1.rc)
   fuubar
   gratr!
   heroku

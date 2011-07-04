@@ -22,7 +22,8 @@ def run_withnotify(*files)
 end
 
 def run_all_specs
-  run_withnotify *Dir["spec/**/*_spec.rb"]
+  test_dirs = Dir['spec/*'].reject { |dir| dir =~ /request/ }
+  run_withnotify *Dir[*test_dirs.map {|dir| "#{dir}/**/*_spec.rb" }]
 end
 
 # ----------------------------------------------------------------------

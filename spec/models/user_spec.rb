@@ -2,15 +2,15 @@
 require 'spec_helper'
 
 describe User do
-  before(:all) do
-    setup_data
-    @alone_user = FactoryGirl.create(:user, :name => 'alone')
-  end
-  after(:all) do 
-    @alone_user.destroy
-    delete_all_data
-  end
   context "友人グラフの作成" do
+    before(:all) do
+      setup_data
+      @alone_user = FactoryGirl.create(:user, :name => 'alone')
+    end
+    after(:all) do 
+      @alone_user.destroy
+      delete_all_data
+    end
     describe "kozaki のグラフ" do 
       subject { @kozaki_graph }
       before do 
@@ -26,5 +26,16 @@ describe User do
 
       it { @kozaki_graph[@suzuki].should == 'suzuki' }
     end
+  end
+  context "#friend?" do 
+    before do 
+      @kozaki = FactoryGirl.create(:user, :name => 'kozaki')
+      @yamada = FactoryGirl.create(:user, :name => 'yamada')
+    end
+    it { @kozaki.friend?(@yamada).should be_false }
+    it { 
+      @kozaki.friends << @yamada
+      @kozaki.friend?(@yamada).should be_true
+    }
   end
 end

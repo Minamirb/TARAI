@@ -7,7 +7,7 @@ class Message < ActiveRecord::Base
 
   scope :not_yet_comment_by, lambda { |user|
     messages = Message.all.reject do |message|
-      Feedback.where(:message_id => message).where(:user_id => user).exists?
+      Feedback.where(:message_id => message, :user_id => user).exists?
     end
     where(:id => messages)
   }
@@ -15,8 +15,7 @@ class Message < ActiveRecord::Base
 
   scope :bad_marked_by, lambda { |user|
     joins('INNER JOIN feedbacks ON messages.id = feedbacks.message_id').
-    where(:'feedbacks.user_id' => user).
-    where(:'feedbacks.good' => false)
+    where(:'feedbacks.user_id' => user, :'feedbacks.good' => false)
   }
   
   scope :exclude_bad_marked_by, lambda { |user|
@@ -27,7 +26,7 @@ class Message < ActiveRecord::Base
   }
 
   def not_yet_comment_by(user)
-    feedbacks.where('user_id = ?', user).empty?
+    feedbacks.where(:user_id => user).empty?
   end
 
   def already_comment_by(user)
@@ -35,11 +34,11 @@ class Message < ActiveRecord::Base
   end
 
   def good_marked_by(user)
-    Feedback.where(:message_id => self).where(:user_id => user).be_good.exists?
+    feedbacks.where(:user_id => user).be_good.exists?
   end
 
   def bad_marked_by(user)
-    Feedback.where(:message_id => self).where(:user_id => user).be_bad.exists?
+    feedbacks.where(:user_id => user).be_bad.exists?
   end
 
   def reachable?

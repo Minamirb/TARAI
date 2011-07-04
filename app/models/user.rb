@@ -18,8 +18,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
   
   def friend?(user)
-    return true if friends.index{|f| f.id == user.id}
-    return false
+    Friendship.where(:user_id => self, :friend_id => user).exists?
   end
 
   def twitter_auth?
