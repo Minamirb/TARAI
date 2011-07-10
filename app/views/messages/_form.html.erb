@@ -1,3 +1,17 @@
+<script>
+// ユーザー選択ダイアログ表示
+function show_window() {
+  $("#target").dialog({
+    modal:true,
+    height:300
+  });
+}
+</script>
+
+<div id="target" style="display:none;">
+<%= render 'select_user' %>
+</div>
+
 <%= form_for(@message) do |f| %>
   <% if @message.errors.any? %>
     <div id="error_explanation">
@@ -13,9 +27,10 @@
 
   <div class="field">
     <%= f.label :to_user %><br />
-    <%= @message.to_user.name %>
+    <%= text_field_tag :name, '', :readonly => 'readonly'  %>
     <%= f.hidden_field :to_user_id %>
     <%= f.hidden_field :from_user_id %>
+    <%= link_to_function :selecd_user, 'show_window()'%>
   </div>
   <div class="field">
     <%= f.label :joke %><br />

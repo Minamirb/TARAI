@@ -1,0 +1,28 @@
+<script>
+function setUserInfo(name, id){
+  $("#name").val(name);
+  $("#message_to_user_id").val(id);
+  $("#target").dialog('close');
+}
+</script>
+<%= paginate @users, :params => { :action => :select_user}, :remote => true  %>
+<table>
+  <tr>
+    <% scope = [:messages] %>
+    <th><%= t(:name, :scope => scope) %></th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <%= form_tag :action => :create, :id => user.id do %>
+  <tr>
+    <td><%= user.name %></td>
+
+    <td> <%= link_to_function :select, "setUserInfo('#{user.name}', '#{user.id}');" %>  </td>
+  </tr>
+  <% end %>
+<% end %>
+</table>
+<br />
+
+

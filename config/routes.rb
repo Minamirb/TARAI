@@ -21,7 +21,6 @@ Tarai::Application.routes.draw do
   }
 
   get 'messages/select_user', :as => :select_user
-  match 'messages/:id/new' => "messages#new", :as => :new_message
 
   resources :messages do 
     collection do 

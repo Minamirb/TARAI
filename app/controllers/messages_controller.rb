@@ -25,17 +25,14 @@ class MessagesController < ApplicationController
   # GET /messages/new
   # GET /messages/new.xml
   def new
+    # ユーザー選択用のデータ取得
+    @users = User.where("id <> ?", current_user.id).page(params[:page])
     @message = 
       if params[:message_id] 
         Message.new(Message.find(params[:message_id]).attributes)
       else
-        Message.new(:from_user => current_user, :to_user => User.find(params[:id]))
+        Message.new(:from_user => current_user)
       end
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @message }
-    end
   end
 
   # GET /messages/1/edit
@@ -130,6 +127,11 @@ class MessagesController < ApplicationController
   def select_user
     # find all user not in current_user
     @users = User.where("id <> ?", current_user.id).page(params[:page])
+
+    render do |page|
+      page.replace_html 'target', :partial => 'select_user'
+    end
+ 
   end
 
 end
