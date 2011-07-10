@@ -5,7 +5,7 @@ function setUserInfo(name, id){
   $("#target").dialog('close');
 }
 </script>
-<%= paginate @users, :params => { :action => :select_user}, :remote => true  %>
+<%= paginate @users, :params => {:action => :select_user}, :remote => true  %>
 <table>
   <tr>
     <% scope = [:messages] %>
@@ -17,7 +17,6 @@ function setUserInfo(name, id){
   <%= form_tag :action => :create, :id => user.id do %>
   <tr>
     <td><%= user.name %></td>
-
     <td> <%= link_to_function :select, "setUserInfo('#{user.name}', '#{user.id}');" %>  </td>
   </tr>
   <% end %>

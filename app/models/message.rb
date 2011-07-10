@@ -5,6 +5,8 @@ class Message < ActiveRecord::Base
   has_many :good_feedbacks, :class_name => "Feedback", :conditions => proc { "good = 't'"}
   has_many :bad_feedbacks, :class_name => "Feedback", :conditions => proc { "good = 'f'" }
 
+  validates_presence_of :to_user_id
+
   scope :not_yet_comment_by, lambda { |user|
     messages = Message.all.reject do |message|
       Feedback.where(:message_id => message, :user_id => user).exists?
