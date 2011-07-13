@@ -2,6 +2,12 @@
 require 'spec_helper'
 
 describe User do
+  context "バリデーション" do 
+    it "名前は必須" do
+      user = FactoryGirl.build(:user, :name => nil, :email => 'foo@gmail.com')
+      user.should be_invalid
+    end
+  end
   context "友人グラフの作成" do
     before(:all) do
       setup_data
