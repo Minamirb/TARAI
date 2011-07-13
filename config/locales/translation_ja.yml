@@ -10,6 +10,8 @@ ja:
       user:
         name: 名前
         email: Eメール
+        password: パスワード
+        password_confirmation: パスワード(確認)
         encrypted_password: 暗号化されたパスワード  #g
         reset_password_token: パスワードのトークンをリセットします。  #g
         reset_password_sent_at: で送信されたパスワードをリセットする  #g
@@ -25,6 +27,8 @@ ja:
         sended_messages: Sendedメッセージ  #g
         received_messages: 受信したメッセージ  #g
         feedbacks: フィードバック  #g
+        remember_me: ログイン状態を保持する
+        current_password: 現在のパスワード
 
       message:
         to_user:  宛先
@@ -102,4 +106,39 @@ ja:
       previous: "«前"
       next: "次»"
       truncate: "..."
-  
+
+  update: 更新
+
+  mailer:
+    confirmation_instructions:
+      subject: 'アカウントの登録方法'
+    reset_password_instructions:
+      subject: 'パスワードの再設定'
+      hello: 'やあやあ %{email} さん'
+      click_link: 'どうやらパスワードを忘れてしまったようだね。次のリンクをクリックして、新しいパスワードを設定したまえ。'
+      change_password: 'パスワード再設定'
+      ignore: 'このメールに心当たりがないなら、私のことは忘れてもらって構わない。'
+      not_yet: '先のリンクをクリックして、パスワードを再設定しなければ何も起こらないさ。'
+    unlock_instructions:
+      subject: 'アカウントの凍結解除'
+
+  passwords:
+    new:
+      send_instructions: 'パスワードのリセット方法を数分以内にメールでご連絡します。'
+      forgot: 'パスワードをお忘れの場合'
+    edit:
+      change: 'パスワードの変更'
+      new_password: '新しいパスワード'
+      new_password_confirmation: '新しいパスワード(確認)'
+      updated: 'パスワードを変更しました。'
+
+  registrations:
+    edit:
+      leave_it: '変更ない場合は空白のままとして下さい'
+      need_current_password: 'ユーザー情報を変更する場合に入力して下さい'
+    show:
+      leave: '退会する'
+    signed_up: 'アカウント登録を受け付けました。確認のメールをお送りします。'
+    updated: 'アカウントを更新しました。'
+    destroyed: 'アカウントを削除しました。またのご利用をお待ちしております。'
+      
